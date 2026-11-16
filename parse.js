@@ -37,7 +37,7 @@ blockGuard('blockquote', ' >');
 blockGuard('list', ' *+-0123456789');
 blockGuard('html', ' <');
 blockGuard('def', ' [');
-guard('table', source => /\n {0,3}(?:\| *)?:?-/.test(source));
+guard('table', source => /^[^\n]*\n {0,3}(?:\| *)?:?-/.test(source));
 guard('lheading', source => /\n {0,3}[=-]/.test(source));
 
 /** Render one Markdown document with Marked 18.1.3's default configuration. */
