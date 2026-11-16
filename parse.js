@@ -24,6 +24,22 @@ guard('br', source => source.charCodeAt(0) === 32 || source.charCodeAt(0) === 92
 guard('del', source => source.charCodeAt(0) === 126);
 guard('autolink', source => source.charCodeAt(0) === 60);
 
+function blockGuard(name, characters) {
+  guard(name, source => characters.includes(source[0]));
+}
+
+blockGuard('space', ' \t\n');
+blockGuard('code', ' \t');
+blockGuard('fences', ' `~');
+blockGuard('heading', ' #');
+blockGuard('hr', ' -_*');
+blockGuard('blockquote', ' >');
+blockGuard('list', ' *+-0123456789');
+blockGuard('html', ' <');
+blockGuard('def', ' [');
+guard('table', source => /\n {0,3}(?:\| *)?:?-/.test(source));
+guard('lheading', source => /\n {0,3}[=-]/.test(source));
+
 /** Render one Markdown document with Marked 18.1.3's default configuration. */
 export function parse(markdown) {
   return parser.parse(markdown);
