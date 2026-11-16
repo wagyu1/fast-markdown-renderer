@@ -1,4 +1,9 @@
-import { marked, Tokenizer } from './vendor/marked/marked.esm.js';
+import { Marked, Renderer, Tokenizer } from './vendor/marked/marked.esm.js';
+
+const parser = new Marked({
+  renderer: new Renderer(),
+  tokenizer: new Tokenizer(),
+});
 
 const tokenizers = Tokenizer.prototype;
 
@@ -21,5 +26,5 @@ guard('autolink', source => source.charCodeAt(0) === 60);
 
 /** Render one Markdown document with Marked 18.1.3's default configuration. */
 export function parse(markdown) {
-  return marked.parse(markdown);
+  return parser.parse(markdown);
 }
